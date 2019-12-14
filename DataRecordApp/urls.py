@@ -9,6 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/', include(user_router.urls)),
     url(r'^api/', include(blog_router.urls)),
-    url(r'^login/', obtain_jwt_token),
+    url(r'^api/signin/', obtain_jwt_token),
+    url(r'^api/', include('accounts.urls')),
 ]
-

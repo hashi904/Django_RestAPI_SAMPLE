@@ -3,32 +3,34 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, date_of_birth, height, weight, password=None):
+    def create_user(self, request_data, **kwargs):
         #メールアドレスの登録を必須
-        if not email:
+        if not request_data['email']:
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            email=self.normalize_email(email),
-            username = username,
-            date_of_birth=date_of_birth,
-            height=height,
-            weight=weight,
+            email=self.normalize_email(request_data['email']),
+            username = request_data['username'],
+            date_of_birth=request_data['date_of_birth'],
+            height=request_data['height'],
+            weight=request_data['weight']
         )
 
-        user.set_password(password)
+        user.set_password(request_data['password'])
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, date_of_birth, height, weight, password):
-        user = self.create_user(
-            email,
-            username,
-            password=password,
-            date_of_birth=date_of_birth,
-            height=height,
-            weight=weight,
-        )
+    def create_superuser(self, email, username, date_of_birth, height, weight, password, **extra_fields):
+
+        request_data = {
+            'email': email,
+            'username': username,
+            'date_of_birth': date_of_birth,
+            'height': height,
+            'weight': weight,
+            'password': password
+        }
+        user = self.create_user(request_data)
         user.is_admin = True
         user.save(using=self._db)
         return user
