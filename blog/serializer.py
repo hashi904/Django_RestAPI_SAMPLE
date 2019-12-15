@@ -5,7 +5,6 @@ from .models import Blog
 from accounts.serializer import UserSerializer
 
 class BlogSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Blog
