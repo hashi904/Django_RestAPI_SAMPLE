@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'blog',
+    'fitbit',
     'rest_framework',
     'rest_framework.authtoken', 
     'rest_auth',           
