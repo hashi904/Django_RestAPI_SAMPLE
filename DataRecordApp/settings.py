@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken', 
     'rest_auth',
-    'corsheaders',          
+    'corsheaders',   
+    'django_filters',
+    'crispy_forms',       
 ]
 
 MIDDLEWARE = [
@@ -148,6 +150,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
 
 REST_USE_JWT = True
