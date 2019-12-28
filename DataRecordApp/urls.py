@@ -7,7 +7,8 @@ from accounts.urls import router as user_router
 from fitbit.urls import router as fitbit_router
 from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('api/master/', admin.site.urls),
     url(r'^api/', include(user_router.urls)),
     url(r'^api/', include(blog_router.urls)),
     url(r'^api/fitbit/', include(fitbit_router.urls)),
