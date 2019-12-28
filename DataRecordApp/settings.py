@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'DataRecordApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DataRecordApp-db',
+        'NAME': 'data_record_app_db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
