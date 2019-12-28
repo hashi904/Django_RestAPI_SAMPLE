@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+d@^+8__6=q)q9j(bbhnakd0@a%&ond^pmdyx1gg3-yzcagkj&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -139,14 +139,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/usr/share/nginx/html/static'
-MEDIA_ROOT = '/usr/share/nginx/html/media'
-
-#Amazon SES関連設定
-#AWS_SES_ACCESS_KEY = os.environ.get('AWS_SES_ACCESS_KEY_ID')
-#AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
-#EMAIL_BACKEND = 'django_ses.SESBackend'
-
 AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
@@ -165,45 +157,4 @@ REST_USE_JWT = True
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'DataRecordApp.utils.my_jwt_response_handler'
-}
-
-#ロギング
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    #ロガーの設定
-    'loggers': {
-        #Djangoが利用するロガー
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO',
-        },
-        #diaryアプリケーションが利用するロガー
-        'diary': {
-            'handlers': ['file'],
-            'level': 'INFO'
-        },
-    },
-    'handlers': {
-        'file':{
-            'level': 'INFO',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
-            'formatter': 'prod',
-            'when': 'D', #日単位
-            'interval': 1,
-            'backupCount': 7
-        },
-    },
-    #フォーマッターの設定
-    'formatters': {
-        'prod': {
-            'format': '\t'.join([
-                '%(asctime)s',
-                '[%(levelname)s]',
-                '%(pathname)s(Line:%(lineno)d)',
-                '%(message)s'
-            ])
-        },
-    }
 }
