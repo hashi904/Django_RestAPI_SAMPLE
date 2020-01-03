@@ -9,3 +9,7 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     #外部キー　user.blogsで呼び出し
     user = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)
+    image = models.FileField(blank=True,null=True,upload_to='blog')
+    def __str__(self):
+        return self.file.url
+    
